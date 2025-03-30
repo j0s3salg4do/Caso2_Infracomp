@@ -16,7 +16,7 @@ public class Main {
             int tamPagina = sc.nextInt();
             sc.nextLine(); // consumir salto
             
-            String ruta = "C:/Users/Daniela/OneDrive - Universidad de los Andes/Universidad/Noveno Semestre/Infraestructura Computacional/Caso 2/Caso2/Datos/imagen.bmp";
+            String ruta =  "Datos/imagen.bmp";
             String nombreImagen = ruta;
 
             Imagen imagen = new Imagen(nombreImagen);
