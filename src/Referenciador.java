@@ -106,7 +106,19 @@ public class Referenciador extends Thread {
             }
 
         }
+        
 
+    }
+    public int getHits() {
+        return hits;
+    }
+
+    public int getFallas() {
+        return fallas;
+    }
+
+    public long getTiempoTotalNs() {
+        return tiempoTotalNs;
     }
 
 }

@@ -1,4 +1,3 @@
-// Clase principal con menú de opciones 1 y 2
 import java.util.Scanner;
 
 public class Main {
@@ -16,11 +15,11 @@ public class Main {
             int tamPagina = sc.nextInt();
             sc.nextLine(); // consumir salto
             
-            String ruta =  "Datos/imagen.bmp";
+            String ruta = "Datos/imagen.bmp";
             String nombreImagen = ruta;
 
             Imagen imagen = new Imagen(nombreImagen);
-            Imagen imagenSalida = new Imagen(nombreImagen); // salida dummy
+            Imagen imagenSalida = new Imagen(nombreImagen); 
             FiltroSobel filtro = new FiltroSobel(imagen, imagenSalida);
             filtro.generarReferencias(tamPagina, "referencias.txt");
 
@@ -28,14 +27,34 @@ public class Main {
             System.out.print("Ingrese número de marcos de página: ");
             int numMarcos = sc.nextInt();
             sc.nextLine(); // consumir salto
+            String archivoReferencias = "referencias.txt";
 
-            System.out.print("Ingrese ruta del archivo de referencias: ");
-            String archivoReferencias = sc.nextLine();
+            TablaPaginas tablaPaginas = new TablaPaginas();
+            Referenciador referenciador = new Referenciador(numMarcos, archivoReferencias, tablaPaginas);
+            Actualizador actualizador = new Actualizador(tablaPaginas);
+
+            referenciador.start();
+            actualizador.start();
+
+            try {
+                referenciador.join(); // Esperar a que termine el referenciador
+                actualizador.detener(); // Detener el actualizador
+                actualizador.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Mostrar resultados
+            System.out.println("Resultados:");
+            System.out.println("Hits: " + referenciador.getHits());
+            System.out.println("Fallas: " + referenciador.getFallas());
+            System.out.println("Tiempo total (ns): " + referenciador.getTiempoTotalNs());
+            System.out.println("Porcentaje de hits: " + 
+                (referenciador.getHits() * 100.0 / (referenciador.getHits() + referenciador.getFallas())) + "%");
 
         } else {
             System.out.println("Opción no válida.");
         }
+
     }
 }
-
-
