@@ -11,12 +11,12 @@ public class Main {
         sc.nextLine(); // consumir salto
 
         if (opcion == 1) {
+            System.out.print("Ingrese ruta del archivo BMP: ");
+            String nombreImagen = sc.nextLine();
+
             System.out.print("Ingrese tamaño de página en bytes: ");
             int tamPagina = sc.nextInt();
             sc.nextLine(); // consumir salto
-            
-            String ruta = "Datos/imagen.bmp";
-            String nombreImagen = ruta;
 
             Imagen imagen = new Imagen(nombreImagen);
             Imagen imagenSalida = new Imagen(nombreImagen); 
@@ -27,7 +27,9 @@ public class Main {
             System.out.print("Ingrese número de marcos de página: ");
             int numMarcos = sc.nextInt();
             sc.nextLine(); // consumir salto
-            String archivoReferencias = "referencias.txt";
+
+            System.out.print("Ingrese ruta del archivo de referencias: ");
+            String archivoReferencias = sc.nextLine();
 
             TablaPaginas tablaPaginas = new TablaPaginas();
             Referenciador referenciador = new Referenciador(numMarcos, archivoReferencias, tablaPaginas);

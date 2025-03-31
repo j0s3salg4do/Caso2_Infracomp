@@ -12,7 +12,7 @@ public class TablaPaginas {
     }
 
     // Añadir las páginas con sus entradas a la tabla de páginas
-    public void agregarEntrada(int numPag) {
+    public synchronized void agregarEntrada(int numPag) {
         EntradaPagina entrada = new EntradaPagina();
         tablaPaginas.put(numPag, entrada);
     }
